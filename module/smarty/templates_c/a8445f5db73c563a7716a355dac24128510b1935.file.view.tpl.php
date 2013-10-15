@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.14, created on 2013-09-30 00:31:20
+<?php /* Smarty version Smarty-3.1.14, created on 2013-10-15 23:34:29
          compiled from "/home/ziggi/public_html/cookiesys/module/page/view.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:18838554895248744ddd1561-25282639%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'a8445f5db73c563a7716a355dac24128510b1935' => 
     array (
       0 => '/home/ziggi/public_html/cookiesys/module/page/view.tpl',
-      1 => 1380480368,
+      1 => 1381865404,
       2 => 'file',
     ),
     'ea09fce897b21b0423acbf5a3d53c6d452ca00ff' => 
     array (
       0 => '/home/ziggi/public_html/cookiesys/template/default/template.tpl',
-      1 => 1380486680,
+      1 => 1381865404,
       2 => 'file',
     ),
   ),

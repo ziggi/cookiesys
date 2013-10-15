@@ -12,8 +12,8 @@ require_once 'view.php';
 
 
 // error reporting
-error_reporting(Config::get()->debug ? E_ALL : 0);
-ini_set('display_errors', Config::get()->debug);
+error_reporting(Config::get()->site->debug ? E_ALL : 0);
+ini_set('display_errors', Config::get()->site->debug);
 
 
 // init

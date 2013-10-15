@@ -14,28 +14,21 @@ class Config extends App {
 	}
 	
 	function __construct() {
-		$this->_cfg = array(
-			'debug' => true,
-			'test' => array(
-				'test1' => array(
-					'test2' => 23,
-				),
-			),
-			'path' => array(
+		$this->_cfg['path'] = array(
 				'uri' => 'cookiesys/',
 				'site' => SITE_DIR,
 				'template' => SITE_DIR . '/template',
 				'module' => SITE_DIR . '/module',
-			),
-			'uri' => array(
-				'site' => '//' . $_SERVER['SERVER_ADDR'] . '/cookiesys',
-				'asset' => '//' . $_SERVER['SERVER_ADDR'] . '/cookiesys/asset',
-				'template' => '//' . $_SERVER['SERVER_ADDR'] . '/cookiesys/template/default',
-			),
-			'site' => array(
+			);
+		$this->_cfg['uri'] = array(
+				'site' => '//' . $_SERVER['SERVER_ADDR'] . '/' . $this->_cfg['path']['uri'],
+				'asset' => '//' . $_SERVER['SERVER_ADDR'] . '/' . $this->_cfg['path']['uri'] . 'asset',
+				'template' => '//' . $_SERVER['SERVER_ADDR'] . '/' . $this->_cfg['path']['uri'] . '/template/default',
+			);
+		$this->_cfg['site'] = array(
+				'debug' => true,
 				'template' => 'default',
-			),
-		);
+			);
 	}
 	
 	function __get($name) { 
