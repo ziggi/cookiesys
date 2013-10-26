@@ -13,7 +13,7 @@ class Route extends App {
 
 		// default
 		if ($uri == '/') {
-			$uri = '/page/main';
+			$uri = '/news';
 		}
 
 		// роутинг
@@ -24,7 +24,7 @@ class Route extends App {
 		foreach (self::$_huri as $key_pattern => $pre_params) {
 			// подготовка паттерна для сравнения
 			$pattern = preg_replace('/\//i', '\/', $key_pattern);
-			$pattern = preg_replace('/:(\w+)/i', '(\w+)', $pattern);
+			$pattern = preg_replace('/:(\w+)/i', '([\w-]+)', $pattern);
 
 			// сравниваем URI с паттерном
 			$found = preg_match('/^' . $pattern . '.?$/i', $uri, $matches);
