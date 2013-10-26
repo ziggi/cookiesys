@@ -2,10 +2,10 @@
 
 class Controller_News extends Controller {
 
-    function __construct() {
+	function __construct() {
 		parent::__construct();
-        $this->model = new Model_News();
-    }
+		$this->model = new Model_News();
+	}
 
 	public function showAll() {
 		$data = $this->model->getAll();

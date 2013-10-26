@@ -12,10 +12,10 @@ class Model_Page extends Model {
 		
 		$array = $result->fetch_assoc();
 		$data = array(
-			'name' => $array['name'],
-			'title' => $array['title'],
-			'text' => $array['text'],
-		);
+				'name' => $array['name'],
+				'title' => $array['title'],
+				'text' => $array['text'],
+			);
 		
 		return $data;
 	}
