@@ -14,6 +14,12 @@ class Config extends App {
 	}
 	
 	function __construct() {
+		$this->_cfg['db'] = array(
+				'host' => '127.0.0.1',
+				'base' => 'cookiesys',
+				'user' => 'root',
+				'pass' => 'root',
+			);
 		$this->_cfg['path'] = array(
 				'uri' => 'cookiesys/',
 				'site' => SITE_DIR,

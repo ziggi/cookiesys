@@ -5,7 +5,12 @@ class Model {
 	public $db;
 
 	function __construct() {
-		$this->db = new mysqli('127.0.0.1', 'root', 'root', 'cookiesys');
+		$host = Config::get()->db->host;
+		$base = Config::get()->db->base;
+		$user = Config::get()->db->user;
+		$pass = Config::get()->db->pass;
+
+		$this->db = new PDO("mysql:host=$host;dbname=$base", $user, $pass);
 	}
 
 }
