@@ -3,25 +3,36 @@
 include_once 'Smarty-3.1.14/Smarty.class.php';
 
 class View implements iView {
+	public $extends;
+	private $smarty;
+
+	function __construct() {
+		$this->smarty = new Smarty();
+
+		$this->smarty->setTemplateDir(Config::get()->path->template . '/' . Config::get()->site->template);
+		$this->smarty->setCompileDir(__DIR__ . '/templates_c');
+		$this->smarty->setCacheDir(__DIR__ . '/cache');
+		$this->smarty->setConfigDir(__DIR__ . '/configs');
+
+		$this->smarty->assign('uri', Config::get()->uri->returnArray());
+	}
+
+	public function addExtend($view, $module, $param) {
+		$this->extends .= Config::get()->path->module . '/' . $module . '/' . $view . '|';
+		
+		$this->smarty->assign($module, $param);
+	}
 
 	public function render($data = null, $module = null, $file = 'template.tpl') {
-		$smarty = new Smarty();
-
-		$smarty->setTemplateDir(Config::get()->path->template . '/' . Config::get()->site->template);
-		$smarty->setCompileDir(__DIR__ . '/templates_c');
-		$smarty->setCacheDir(__DIR__ . '/cache');
-		$smarty->setConfigDir(__DIR__ . '/configs');
-
-		$smarty->assign('uri', Config::get()->uri->returnArray());
-		$smarty->assign('data', $data);
+		$this->smarty->assign('data', $data);
 
 		if (isset($data['errorMsg'])) {
-			$smarty->display('404.tpl');
+			$this->smarty->display('404.tpl');
 		} else {
 			if ($module === null) {
-				$smarty->display($file);
+				$this->smarty->display('extends:' . $this->extends . $file);
 			} else {
-				$smarty->display(Config::get()->path->module . '/' . $module . '/' . $file);
+				$this->smarty->display('extends:' . $this->extends . Config::get()->path->module . '/' . $module . '/' . $file);
 			}
 		}
 	}
