@@ -3,7 +3,7 @@
 include_once 'Smarty-3.1.14/Smarty.class.php';
 
 class View implements iView {
-	
+
 	public $extends;
 
 	private $smarty;
@@ -19,10 +19,12 @@ class View implements iView {
 		$this->smarty->assign('uri', Config::get()->uri->returnArray());
 	}
 
-	public function addExtend($view, $module, $param) {
+	public function addExtend($view, $module, $param = null) {
 		$this->extends .= Config::get()->path->module . '/' . $module . '/' . $view . '|';
 		
-		$this->smarty->assign($module, $param);
+		if ($param !== null) {
+			$this->smarty->assign($module, $param);
+		}
 	}
 
 	public function render($data = null, $module = null, $file = 'template.tpl') {
