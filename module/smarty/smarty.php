@@ -3,7 +3,9 @@
 include_once 'Smarty-3.1.14/Smarty.class.php';
 
 class View implements iView {
+	
 	public $extends;
+
 	private $smarty;
 
 	function __construct() {
@@ -26,14 +28,10 @@ class View implements iView {
 	public function render($data = null, $module = null, $file = 'template.tpl') {
 		$this->smarty->assign('data', $data);
 
-		if (isset($data['errorMsg'])) {
-			$this->smarty->display('404.tpl');
+		if ($module === null) {
+			$this->smarty->display('extends:' . $this->extends . $file);
 		} else {
-			if ($module === null) {
-				$this->smarty->display('extends:' . $this->extends . $file);
-			} else {
-				$this->smarty->display('extends:' . $this->extends . Config::get()->path->module . '/' . $module . '/' . $file);
-			}
+			$this->smarty->display('extends:' . $this->extends . Config::get()->path->module . '/' . $module . '/' . $file);
 		}
 	}
 

@@ -26,7 +26,7 @@ class Model_News extends Model {
 		$result = $this->db->query("SELECT * FROM `news` WHERE `name`='$news_name'");
 
 		if ($result === false || $result->rowCount() == 0) {
-			$data['errorMsg'] = 'Страница не найдена';
+			$data['errorMsg'] = 'Новость не найдена';
 			return $data;
 		}
 		

@@ -12,6 +12,10 @@ class Controller_Page extends Controller {
 
 		$data = $this->model->get($page_name);
 		
-		$this->view->render($data, 'page', 'view.tpl');
+		if (isset($data['errorMsg'])) {
+			$this->view->render($data, null, '404.tpl');
+		} else {
+			$this->view->render($data, 'page', 'view.tpl');
+		}
 	}
 }

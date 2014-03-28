@@ -10,7 +10,11 @@ class Controller_News extends Controller {
 	public function showAll() {
 		$data = $this->model->getAll();
 		
-		$this->view->render($data, 'news', 'view_all.tpl');
+		if (isset($data['errorMsg'])) {
+			$this->view->render($data, null, '404.tpl');
+		} else {
+			$this->view->render($data, 'news', 'view_all.tpl');
+		}
 	}
 
 	public function showOne($param) {
@@ -18,6 +22,10 @@ class Controller_News extends Controller {
 
 		$data = $this->model->get($news_name);
 		
-		$this->view->render($data, 'news', 'view.tpl');
+		if (isset($data['errorMsg'])) {
+			$this->view->render($data, null, '404.tpl');
+		} else {
+			$this->view->render($data, 'news', 'view.tpl');
+		}
 	}
 }
