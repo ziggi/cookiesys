@@ -37,7 +37,7 @@ class Route extends App {
 							return "(" . $matches[3] . ")";
 						}
 					} else {
-						return "([\w-]+)";
+						return "(" . self::$_pattern_types['string'] . ")";
 					}
 				}
 				, $pattern);
