@@ -3,13 +3,17 @@
 class Route extends App {
 	
 	private static $_huri;
+	private static $_pattern_types = array(
+			'number' => '[0-9]+',
+			'string' => '[a-zA-Zа-яА-ЯёЁ0-9\-]+',
+		);
 
 	public function addRule($pattern, $params) {
 		self::$_huri[$pattern] = $params;
 	}
 	
 	public function start() {
-		$uri = substr($_SERVER['REQUEST_URI'], strlen( Config::get()->path->uri ));
+		$uri = urldecode(substr($_SERVER['REQUEST_URI'], strlen( Config::get()->path->uri )));
 
 		// default
 		if ($uri == '/') {
@@ -24,10 +28,22 @@ class Route extends App {
 		foreach (self::$_huri as $key_pattern => $pre_params) {
 			// подготовка паттерна для сравнения
 			$pattern = preg_replace('/\//i', '\/', $key_pattern);
-			$pattern = preg_replace('/:(\w+)/i', '([\w-]+)', $pattern);
+			$pattern = preg_replace_callback('/:(\w+)(\{([^:]+)\})?/i',
+				function ($matches) {
+					if (isset($matches[3])) {
+						if (isset(self::$_pattern_types[$matches[3]])) {
+							return "(" . self::$_pattern_types[$matches[3]] . ")";
+						} else {
+							return "(" . $matches[3] . ")";
+						}
+					} else {
+						return "([\w-]+)";
+					}
+				}
+				, $pattern);
 
 			// сравниваем URI с паттерном
-			$found = preg_match('/^' . $pattern . '.?$/i', $uri, $matches);
+			$found = preg_match('/^' . $pattern . '.?$/iu', $uri, $matches);
 			if ($found == 1) {
 				array_shift($matches);
 				$params = $matches;
@@ -71,7 +87,7 @@ class Route extends App {
 		if ( !method_exists($controller, $action) ) {
 			throw new Exception('Не найден обработчик');
 		}
-		
+
 		// вызываем метод
 		$controller = new $controller;
 		$controller->$action($params);

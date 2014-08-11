@@ -12,7 +12,7 @@ $this->route()->addRule(
 	);
 
 $this->route()->addRule(
-	'/news/:name', array(
+	'/news/:name{string}', array(
 			'controller' => 'Controller_News',
 			'module' => 'news',
 			'action' => 'showOne',
