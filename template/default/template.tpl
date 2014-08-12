@@ -47,7 +47,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Аккаунт <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li style="width: 275px">
+                <li>
                   <form class="form-signin navbar-form">
                     <input type="text" class="form-control" placeholder="Логин" autofocus>
                     <input type="password" class="form-control" placeholder="Пароль">
@@ -68,54 +68,50 @@
         </div>
 
         <div class="col-sm-3">
-          <div class="container">
-            <div class="panel panel-default">
-              <div class="panel-body text-center" style="padding: 5px">
-                <a href="http://vk.com/" target="_blank"><img src="{$uri.template}/img/vk.png" alt="vk"></a>
-                <a href="http://twitter.com/" target="_blank"><img src="{$uri.template}/img/twitter.png" alt="twitter"></a>
-                <a href="http://youtube.com/" target="_blank"><img src="{$uri.template}/img/youtube.png" alt="youtube"></a>
-                <a href="http://facebook.com/" target="_blank"><img src="{$uri.template}/img/facebook.png" alt="facebook"></a>
-              </div>
+          <div class="panel panel-default">
+            <div class="panel-body text-center" style="padding: 5px">
+              <a href="http://vk.com/" target="_blank"><img src="{$uri.template}/img/vk.png" alt="vk"></a>
+              <a href="http://twitter.com/" target="_blank"><img src="{$uri.template}/img/twitter.png" alt="twitter"></a>
+              <a href="http://youtube.com/" target="_blank"><img src="{$uri.template}/img/youtube.png" alt="youtube"></a>
+              <a href="http://facebook.com/" target="_blank"><img src="{$uri.template}/img/facebook.png" alt="facebook"></a>
             </div>
+          </div>
 
-            <div class="panel panel-default" style="padding: 3px">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th colspan="2" class="text-center">
-                      Название сервера
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>IP</td>
-                    <td>127.0.0.1</td>
-                  </tr>
-                  <tr>
-                    <td>Версия</td>
-                    <td>0.3x</td>
-                  </tr>
-                  <tr>
-                    <td>Игроки</td>
-                    <td>40 / 100</td>
-                  </tr>
-                </tbody>
-              </table>
-              <button class="btn btn-primary btn-block">Подключиться</button>
-            </div>
+          <div class="panel panel-default" style="padding: 3px">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th colspan="2" class="text-center">
+                    Название сервера
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>IP</td>
+                  <td>127.0.0.1</td>
+                </tr>
+                <tr>
+                  <td>Версия</td>
+                  <td>0.3x</td>
+                </tr>
+                <tr>
+                  <td>Игроки</td>
+                  <td>40 / 100</td>
+                </tr>
+              </tbody>
+            </table>
+            <button class="btn btn-primary btn-block">Подключиться</button>
           </div>
         </div>
       </div>
 
       <!-- Site footer -->
       <div id="footer">
-        <div class="container">
-          <p class="text-muted credit">&copy; <a href="http://ziggi.org/" target="_blank">ziggi</a> 2013</p>
-        </div>
+        <p class="text-muted credit">&copy; <a href="http://ziggi.org/" target="_blank">ziggi</a> 2014</p>
       </div>
     </div>
-    <script src="{$uri.asset}/js/jquery-2.0.3.min.js"></script>
+    <script src="{$uri.asset}/js/jquery-2.1.1.min.js"></script>
     <script src="{$uri.asset}/js/bootstrap.min.js"></script>
   </body>
 </html>
