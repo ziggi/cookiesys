@@ -2,12 +2,12 @@
 <html>
   <head>
     <title>CookieSys</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{$uri.asset}/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="{$uri.template}/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
     <link href="{$uri.template}/css/navbar.css" rel="stylesheet" media="screen">
     <link href="{$uri.template}/css/signin.css" rel="stylesheet" media="screen">
-
   </head>
   <body>
     <div class="container">
