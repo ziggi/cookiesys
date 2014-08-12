@@ -26,6 +26,16 @@ class Route extends App {
 		$found = 0;
 
 		foreach (self::$_huri as $key_pattern => $pre_params) {
+			// реализация постоянного роутинга
+			if ($key_pattern == '/') {
+				$this->executeAction($key_pattern);
+				continue;
+			}
+
+			if ($found == 1) {
+				continue;
+			}
+
 			// подготовка паттерна для сравнения
 			$pattern = preg_replace('/\//i', '\/', $key_pattern);
 			$pattern = preg_replace_callback('/:(\w+)(\{([^:]+)\})?/i',
@@ -64,7 +74,6 @@ class Route extends App {
 
 				// отдаём нужный ключ для параметров роутинга
 				$key = $key_pattern;
-				break;
 			}
 		}
 
@@ -72,6 +81,10 @@ class Route extends App {
 			throw new Exception('Не найдено');
 		}
 
+		$this->executeAction($key, $params);
+	}
+
+	public function executeAction($key, $params = null) {
 		$controller = self::$_huri[$key]['controller'];
 		$action = self::$_huri[$key]['action'];
 		$module = self::$_huri[$key]['module'];
