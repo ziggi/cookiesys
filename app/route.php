@@ -2,14 +2,14 @@
 
 class Route extends App {
 	
-	private static $_huri;
+	private static $_uri_array;
 	private static $_pattern_types = array(
 			'number' => '[0-9]+',
 			'string' => '[a-zA-Zа-яА-ЯёЁ0-9\-]+',
 		);
 
 	public function addRule($pattern, $params) {
-		self::$_huri[$pattern] = $params;
+		self::$_uri_array[] = array('pattern' => $pattern, 'params' => $params);
 	}
 	
 	public function start() {
@@ -25,10 +25,12 @@ class Route extends App {
 		$params = array();
 		$found = 0;
 
-		foreach (self::$_huri as $key_pattern => $pre_params) {
+		foreach (self::$_uri_array as $uri_key => $uri_array) {
+			$key_pattern = $uri_array['pattern'];
+
 			// реализация постоянного роутинга
 			if ($key_pattern == '/') {
-				$this->executeAction($key_pattern);
+				$this->executeAction($uri_key);
 				continue;
 			}
 
@@ -36,7 +38,7 @@ class Route extends App {
 				continue;
 			}
 
-			// подготовка паттерна для сравнения
+			// подготовка паттерна для сравнения и выполнение регулярных выражений в паттерне
 			$pattern = preg_replace('/\//i', '\/', $key_pattern);
 			$pattern = preg_replace_callback('/:(\w+)(\{([^:]+)\})?/i',
 				function ($matches) {
@@ -73,7 +75,7 @@ class Route extends App {
 				}
 
 				// отдаём нужный ключ для параметров роутинга
-				$key = $key_pattern;
+				$key = $uri_key;
 			}
 		}
 
@@ -85,9 +87,13 @@ class Route extends App {
 	}
 
 	public function executeAction($key, $params = null) {
-		$controller = self::$_huri[$key]['controller'];
-		$action = self::$_huri[$key]['action'];
-		$module = self::$_huri[$key]['module'];
+		if ($key === null) {
+			throw new Exception('Паттерн не найден');
+		}
+
+		$controller = self::$_uri_array[$key]['params']['controller'];
+		$action = self::$_uri_array[$key]['params']['action'];
+		$module = self::$_uri_array[$key]['params']['module'];
 		
 		// подгрузка контроллера
 		include_once "module/" . $module . "/controller.php";
