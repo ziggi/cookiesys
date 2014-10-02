@@ -6,6 +6,6 @@ class Controller {
 	public $view;
 
 	function __construct() {
-		$this->view = new View(Config::get()->site->template);
+		$this->view = View::getInstance(Config::get()->site->template);
 	}
 }

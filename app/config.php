@@ -28,8 +28,8 @@ class Config extends App {
 			);
 		$this->_cfg['uri'] = array(
 				'site' => '//' . $_SERVER['SERVER_ADDR'] . '/' . $this->_cfg['path']['uri'],
-				'asset' => '//' . $_SERVER['SERVER_ADDR'] . '/' . $this->_cfg['path']['uri'] . 'asset',
-				'template' => '//' . $_SERVER['SERVER_ADDR'] . '/' . $this->_cfg['path']['uri'] . '/template/default',
+				'module' => '//' . $_SERVER['SERVER_ADDR'] . '/' . $this->_cfg['path']['uri'] . 'module',
+				'template' => '//' . $_SERVER['SERVER_ADDR'] . '/' . $this->_cfg['path']['uri'] . 'template/default',
 			);
 		$this->_cfg['site'] = array(
 				'debug' => true,

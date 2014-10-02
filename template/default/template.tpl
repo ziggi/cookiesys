@@ -4,10 +4,15 @@
     <title>CookieSys</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{$uri.asset}/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="{$uri.template}/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
     <link href="{$uri.template}/css/navbar.css" rel="stylesheet" media="screen">
     <link href="{$uri.template}/css/signin.css" rel="stylesheet" media="screen">
+{foreach $styles as $style_url}
+    <link href="{$style_url}" rel="stylesheet" media="screen">
+{/foreach}
+{foreach $scripts as $script_url}
+    <script src="{$script_url}"></script>
+{/foreach}
   </head>
   <body>
     <div class="container">
@@ -111,7 +116,5 @@
         <p class="text-muted credit">&copy; <a href="http://ziggi.org/" target="_blank">ziggi</a> 2014</p>
       </div>
     </div>
-    <script src="{$uri.asset}/js/jquery-2.1.1.min.js"></script>
-    <script src="{$uri.asset}/js/bootstrap.min.js"></script>
   </body>
 </html>
