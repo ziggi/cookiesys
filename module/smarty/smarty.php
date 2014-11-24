@@ -57,7 +57,13 @@ class View implements iView {
 		if ($module === null) {
 			$this->smarty->display('extends:' . $this->extends . $file);
 		} else {
-			$this->smarty->display('extends:' . $this->extends . Config::get()->path->module . '/' . $module . '/' . $file);
+			$module_template = Config::get()->path->template . '/' . Config::get()->site->template . '/module/' . $module . '/' . $file;
+			
+			if (file_exists($module_template)) {
+				$this->smarty->display('extends:' . $this->extends . $module_template);
+			} else {
+				$this->smarty->display('extends:' . $this->extends . Config::get()->path->module . '/' . $module . '/' . $file);
+			}
 		}
 	}
 }
