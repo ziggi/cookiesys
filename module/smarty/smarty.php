@@ -1,6 +1,6 @@
 <?php
 
-include_once 'Smarty-3.1.19/Smarty.class.php';
+include_once 'Smarty-3.1.21/Smarty.class.php';
 
 class View implements iView {
 
