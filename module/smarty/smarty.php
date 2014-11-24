@@ -18,6 +18,7 @@ class View implements iView {
 		$this->smarty->setCompileDir(__DIR__ . '/templates_c');
 		$this->smarty->setCacheDir(__DIR__ . '/cache');
 		$this->smarty->setConfigDir(__DIR__ . '/configs');
+		$this->smarty->force_compile = true;
 
 		$this->smarty->assign('uri', Config::get()->uri->returnArray());
 	}
