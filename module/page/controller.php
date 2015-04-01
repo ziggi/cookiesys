@@ -2,10 +2,10 @@
 
 class Controller_Page extends Controller {
 
-    function __construct() {
+	function __construct() {
 		parent::__construct();
-        $this->model = new Model_Page();
-    }
+		$this->model = new Model_Page();
+	}
 
 	public function show($params) {
 		$page_name = $params['name'];
