@@ -10,3 +10,11 @@ $this->route()->addRule(
 			'action' => 'show',
 		)
 	);
+
+$this->route()->addRule(
+	'/admin/settings', array(
+			'controller' => 'Controller_Admin',
+			'module' => 'admin',
+			'action' => 'settings',
+		)
+	);

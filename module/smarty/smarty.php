@@ -7,6 +7,7 @@ class View implements iView {
 	public $extends;
 	public $scripts;
 	public $styles;
+	public $data = array();
 
 	private $smarty;
 	private static $_instance = null;
@@ -14,7 +15,10 @@ class View implements iView {
 	private function __construct() {
 		$this->smarty = new Smarty();
 
-		$this->smarty->setTemplateDir(Config::get()->path->template . '/' . Config::get()->site->template);
+		$this->smarty->setTemplateDir(array(
+				'default' => Config::get()->path->template . '/' . Config::get()->site->template,
+				'admin' => Config::get()->path->module . '/admin/view',
+			));
 		$this->smarty->setCompileDir(__DIR__ . '/templates_c');
 		$this->smarty->setCacheDir(__DIR__ . '/cache');
 		$this->smarty->setConfigDir(__DIR__ . '/configs');
@@ -50,8 +54,29 @@ class View implements iView {
 		$this->styles[] = Config::get()->uri->module . '/' . $module . '/' . $name;
 	}
 
+	public function addData($key, $value) {
+		if ($value == null) {
+			return;
+		}
+
+		if (is_array($value)) {
+			if ($key == null) {
+				$this->data = array_merge($this->data, $value);
+			} else {
+				$this->data = array_merge_recursive($this->data, array($key => $value));
+			}
+		} else {
+			if ($key == null) {
+				$this->data[] = $value;
+			} else {
+				$this->data[$key] = $value;
+			}
+		}
+	}
+
 	public function render($data = null, $module = null, $file = 'template.tpl') {
-		$this->smarty->assign('data', $data);
+		$this->addData(null, $data);
+		$this->smarty->assign('data', $this->data);
 		$this->smarty->assign('scripts', $this->scripts);
 		$this->smarty->assign('styles', $this->styles);
 

@@ -21,7 +21,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">CookieSys Admin</a>
+          <a class="navbar-brand" href="{$uri.site}">CookieSys Admin</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -38,17 +38,38 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">CookieSys <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Конфигурация</a></li>
+  {if $uri.current == $uri.site|cat:"admin"}
+            <li class="active">
+  {else}
+            <li>
+  {/if}
+              <a href="{$uri.site}admin">CookieSys</a>
+            </li>
+  {if $uri.current == $uri.site|cat:"admin/settings"}
+            <li class="active">
+  {else}
+            <li>
+  {/if}
+              <a href="{$uri.site}admin/settings">Конфигурация</a>
+            </li>
           </ul>
           <ul class="nav nav-sidebar">
-{foreach from=$data key=module_name item=module}
-            <li><a href="{$uri.site}admin/{$module_name}">{$module.name}</a></li>
+{foreach from=$data.module key=module_name item=module}
+  {if isset($module.active)}
+            <li class="active">
+  {else}
+            <li>
+  {/if}
+              <a href="{$uri.site}admin/{$module_name}">{$module.name}</a>
+            </li>
 {/foreach}
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          {block name=content}{/block}
+          {block name=content}
+            <h4 class="page-header">Admin start page</h4>
+            <p>some text</p>
+          {/block}
         </div>
       </div>
     </div>

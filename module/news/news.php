@@ -18,3 +18,15 @@ $this->route()->addRule(
 			'action' => 'showOne',
 		)
 	);
+
+
+include 'admin/model.php';
+include 'admin/controller.php';
+
+$this->route()->addRule(
+	'/admin/news', array(
+			'controller' => 'Controller_News_Admin',
+			'module' => 'news',
+			'action' => 'show',
+		)
+	);

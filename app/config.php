@@ -30,6 +30,7 @@ class Config extends App {
 				'site' => '//' . $_SERVER['SERVER_ADDR'] . '/' . $this->_cfg['path']['uri'],
 				'module' => '//' . $_SERVER['SERVER_ADDR'] . '/' . $this->_cfg['path']['uri'] . 'module',
 				'template' => '//' . $_SERVER['SERVER_ADDR'] . '/' . $this->_cfg['path']['uri'] . 'template/default',
+				'current' => '//' . $_SERVER['SERVER_ADDR'] . $_SERVER['REQUEST_URI'],
 			);
 		$this->_cfg['site'] = array(
 				'debug' => true,
