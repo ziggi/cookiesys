@@ -2,8 +2,7 @@
 
 
 class Module extends Model {
-	private $modules;
-
+	
 	public function loadAll() {
 		$query = "SELECT
 		            `module1`.`name` as 'name',
@@ -23,39 +22,41 @@ class Module extends Model {
 		}
 
 
-		$this->modules = array_flip(array_diff(scandir('module/'), array('..', '.')));
+		$modules = array_flip(array_diff(scandir('module/'), array('..', '.')));
 
-		foreach ($this->modules as $module => &$params) {
-			$params = array('loaded' => 0, 'depends' => array());
+		foreach ($modules as $module => &$params) {
+			$params = array('loaded' => false, 'depends' => array());
 		}
 
 		while ($row = $result->fetch()) {
-			array_push($this->modules[ $row['name'] ]['depends'], $row['dep_name']);
+			array_push($modules[ $row['name'] ]['depends'], $row['dep_name']);
 		}
 
-		foreach ($this->modules as $module => &$params) {
-			$this->load($module);
+		foreach ($modules as $module => &$params) {
+			$this->load($modules, $module);
 		}
 	}
 
-	public function load($module_name) {
-		if ($this->modules[ $module_name ]['loaded'] == 1) {
+	public function load(&$modules, $module_name) {
+		if ($modules[ $module_name ]['loaded']) {
 			return;
 		}
 
-		foreach ($this->modules[ $module_name ]['depends'] as $dep_name) {
-			$dep_params = $this->modules[ $dep_name ];
+		foreach ($modules[ $module_name ]['depends'] as $dep_name) {
+			$dep_params = $modules[ $dep_name ];
 
-			if ($this->modules[ $dep_name ]['loaded'] == 0) {
-				$this->load($dep_name);
+			if (!$modules[ $dep_name ]['loaded']) {
+				$this->load($modules, $dep_name);
 			}
 		}
+
+		echo $module_name . " ";
 
 		$include_file = 'module/' . $module_name . '/' . $module_name . '.php';
 
 		if (file_exists($include_file)) {
-			$this->modules[ $module_name ]['loaded'] = 1;
-			
+			$modules[ $module_name ]['loaded'] = true;
+
 			include_once $include_file;
 		} else {
 			throw new Exception('Модуль ' . $module_name . ' не загружен');
