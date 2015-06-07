@@ -2,7 +2,7 @@
 
 
 class Module extends Model {
-	
+
 	public function loadAll() {
 		$query = "SELECT
 		            `module1`.`name` as 'name',
@@ -45,7 +45,13 @@ class Module extends Model {
 		foreach ($modules[ $module_name ]['depends'] as $dep_name) {
 			$dep_params = $modules[ $dep_name ];
 
-			if (!$modules[ $dep_name ]['loaded']) {
+			foreach ($dep_params['depends'] as $dep_dep_name) {
+				if ($dep_dep_name === $module_name) {
+					throw new Exception('Рекурсивная зависимость модулей ' . $module_name . ' и ' . $dep_name);
+				}
+			}
+
+			if (!$dep_params['loaded']) {
 				$this->load($modules, $dep_name);
 			}
 		}
