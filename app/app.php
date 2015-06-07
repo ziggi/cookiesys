@@ -30,6 +30,6 @@ class App {
 	
 	public function error($e) {
 		$error_msg = $e->getMessage();
-		echo $error_msg;
+		echo 'Ошибка: ' . $error_msg;
 	}
 }
