@@ -38,38 +38,19 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-  {if $uri.current == $uri.site|cat:"admin"}
-            <li class="active">
-  {else}
-            <li>
-  {/if}
-              <a href="{$uri.site}admin">CookieSys</a>
-            </li>
-  {if $uri.current == $uri.site|cat:"admin/settings"}
-            <li class="active">
-  {else}
-            <li>
-  {/if}
-              <a href="{$uri.site}admin/settings">Конфигурация</a>
-            </li>
-          </ul>
-          <ul class="nav nav-sidebar">
 {foreach from=$data.module key=module_name item=module}
   {if isset($module.active)}
             <li class="active">
   {else}
             <li>
   {/if}
-              <a href="{$uri.site}admin/{$module_name}">{$module.name}</a>
+              <a href="{$uri.site}admin/{$module_name}">{$module.title}</a>
             </li>
 {/foreach}
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          {block name=content}
-            <h4 class="page-header">Admin start page</h4>
-            <p>some text</p>
-          {/block}
+          {block name=content}{/block}
         </div>
       </div>
     </div>

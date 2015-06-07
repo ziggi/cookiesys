@@ -11,6 +11,19 @@ class Route extends App {
 	public function addRule($pattern, $params) {
 		self::$_uri_array[] = array('pattern' => $pattern, 'params' => $params);
 	}
+
+	public function getRule($pattern) {
+		$result = array();
+
+		foreach (self::$_uri_array as $row) {
+			$found = preg_match($pattern, $row['pattern'], $matches);
+			if ($found == 1) {
+				$result[] = $row;
+			}
+		}
+
+		return $result;
+	}
 	
 	public function start() {
 		$uri = urldecode(substr($_SERVER['REQUEST_URI'], strlen( Config::get()->path->uri )));

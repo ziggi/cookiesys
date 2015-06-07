@@ -7,12 +7,12 @@ $this->route()->addRule(
 	'/admin', array(
 			'controller' => 'Controller_Admin',
 			'module' => 'admin',
-			'action' => 'show',
+			'action' => 'settings',
 		)
 	);
 
 $this->route()->addRule(
-	'/admin/settings', array(
+	'/admin/admin', array(
 			'controller' => 'Controller_Admin',
 			'module' => 'admin',
 			'action' => 'settings',

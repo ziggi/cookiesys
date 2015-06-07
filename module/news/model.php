@@ -3,7 +3,7 @@
 class Model_News extends Model {
 
 	function getAll() {
-		$result = $this->db->query("SELECT * FROM `news`");
+		$result = $this->db->query("SELECT `name`, `title`, `text` FROM `news`");
 
 		if ($result === false || $result->rowCount() == 0) {
 			$data['errorMsg'] = 'Новостей нет';
@@ -19,11 +19,12 @@ class Model_News extends Model {
 					'text' => $row['text'],
 				);
 		}
+		
 		return $data;
 	}
 
 	function get($news_name) {
-		$result = $this->db->query("SELECT * FROM `news` WHERE `name`='$news_name'");
+		$result = $this->db->query("SELECT `name`, `title`, `text` FROM `news` WHERE `name` = '$news_name'");
 
 		if ($result === false || $result->rowCount() == 0) {
 			$data['errorMsg'] = 'Новость не найдена';
