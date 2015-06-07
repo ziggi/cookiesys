@@ -50,8 +50,6 @@ class Module extends Model {
 			}
 		}
 
-		echo $module_name . " ";
-
 		$include_file = 'module/' . $module_name . '/' . $module_name . '.php';
 
 		if (file_exists($include_file)) {
