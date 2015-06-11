@@ -14,27 +14,35 @@ class Config extends App {
 	}
 	
 	function __construct() {
+		// editable zone
 		$this->_cfg['db'] = array(
 				'host' => '127.0.0.1',
 				'base' => 'cookiesys',
 				'user' => 'root',
 				'pass' => 'root',
 			);
-		$this->_cfg['path'] = array(
-				'uri' => 'cookiesys/',
-				'site' => SITE_DIR,
-				'template' => SITE_DIR . '/template',
-				'module' => SITE_DIR . '/module',
-			);
-		$this->_cfg['uri'] = array(
-				'site' => '//' . $_SERVER['SERVER_ADDR'] . '/' . $this->_cfg['path']['uri'],
-				'module' => '//' . $_SERVER['SERVER_ADDR'] . '/' . $this->_cfg['path']['uri'] . 'module',
-				'template' => '//' . $_SERVER['SERVER_ADDR'] . '/' . $this->_cfg['path']['uri'] . 'template/default',
-				'current' => '//' . $_SERVER['SERVER_ADDR'] . $_SERVER['REQUEST_URI'],
-			);
 		$this->_cfg['site'] = array(
 				'debug' => true,
 				'template' => 'default',
+			);
+
+		// not editable zone
+		$site_path = dirname($_SERVER['SCRIPT_FILENAME']);
+		$site_subdir = dirname($_SERVER['PHP_SELF']);
+		$site_uri = preg_replace('#/$#', '', $_SERVER['SERVER_NAME'] . $site_subdir);
+
+		$this->_cfg['path'] = array(
+				'uri' => $site_subdir,
+				'site' => $site_path,
+				'module' => $site_path . '/module',
+				'template' => $site_path . '/template',
+			);
+		$this->_cfg['uri'] = array(
+				'site' => '//' . $site_uri,
+				'module' => '//' . $site_uri . '/module',
+				'template' => '//' . $site_uri . '/template/default',
+				'current' => '//' . preg_replace('#/$#', '', $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']),
+				'request' => str_replace($site_subdir, '', $_SERVER['REQUEST_URI']),
 			);
 	}
 	

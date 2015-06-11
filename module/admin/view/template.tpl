@@ -44,7 +44,7 @@
   {else}
             <li>
   {/if}
-              <a href="{$uri.site}admin/{$module_name}">{$module.title}</a>
+              <a href="{$uri.site}/admin/{$module_name}">{$module.title}</a>
             </li>
 {/foreach}
           </ul>

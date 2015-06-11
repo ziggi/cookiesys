@@ -26,7 +26,7 @@ class Route extends App {
 	}
 	
 	public function start() {
-		$uri = urldecode(substr($_SERVER['REQUEST_URI'], strlen( Config::get()->path->uri )));
+		$uri = urldecode(Config::get()->uri->request);
 
 		// default
 		if ($uri == '/') {
