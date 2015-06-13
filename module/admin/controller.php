@@ -16,11 +16,14 @@ class Controller_Admin extends Controller {
 	}
 
 	public function settings() {
-		$data['title'] = 'Настройки';
-		$data['text'] = 'Настройки Cookiesys';
+		$this->view->addScript('js/module_add.js', 'admin');
 
 		$this->view->addData('module', array('admin' => array('active' => true)));
-		$this->view->render($data, 'admin', 'view/settings.tpl');
+		$this->view->render(null, 'admin', 'view/settings.tpl');
+	}
+
+	public function module_add() {
+		print_r($_FILES);
 	}
 
 }

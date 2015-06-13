@@ -18,3 +18,11 @@ $this->route()->addRule(
 			'action' => 'settings',
 		)
 	);
+
+$this->route()->addRule(
+	'/admin/module/add', array(
+			'controller' => 'Controller_Admin',
+			'module' => 'admin',
+			'action' => 'module_add',
+		)
+	);
