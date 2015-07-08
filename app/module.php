@@ -4,6 +4,35 @@
 class Module extends Model {
 
 	public function loadAll() {
+		// get all modules from db
+		$query = "SELECT
+		            `name`,
+		            `installed`
+		          FROM
+		            `module`";
+
+		$result = $this->db->query($query);
+
+		if ($result === false || $result->rowCount() == 0) {
+			$data['errorMsg'] = 'Модулей нет';
+			return $data;
+		}
+
+		// make modules array
+		$modules = array();
+
+		while ($row = $result->fetch()) {
+			if (!(bool)$row['installed']) {
+				continue;
+			}
+
+			$modules[ $row['name'] ] = array(
+			        'loaded' => false,
+			        'depends' => array(),
+			    );
+		}
+
+		// get all modules depends
 		$query = "SELECT
 		            `module1`.`name` as 'name',
 		            `module2`.`name` as 'dep_name'
@@ -21,17 +50,11 @@ class Module extends Model {
 			return $data;
 		}
 
-
-		$modules = array_flip(array_diff(scandir('module/'), array('..', '.')));
-
-		foreach ($modules as $module => &$params) {
-			$params = array('loaded' => false, 'depends' => array());
-		}
-
 		while ($row = $result->fetch()) {
 			array_push($modules[ $row['name'] ]['depends'], $row['dep_name']);
 		}
 
+		// recursive load
 		foreach ($modules as $module => &$params) {
 			$this->load($modules, $module);
 		}
