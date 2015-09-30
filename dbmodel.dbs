@@ -6,8 +6,8 @@
 			<column name="name" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
 			<column name="title" type="varchar" length="255" jt="12" mandatory="y" />
 			<column name="description" type="longtext" length="2147483647" decimal="0" jt="-1" />
-			<column name="installed" type="bool" jt="-7" mandatory="y" >
-				<defo>false</defo>
+			<column name="installed" type="bit" decimal="0" jt="-7" mandatory="y" >
+				<defo>0</defo>
 			</column>
 			<index name="pk_module" unique="PRIMARY_KEY" >
 				<column name="module_id" />
@@ -84,10 +84,10 @@
 	<connector name="MySql" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.34-bin.jar" host="localhost" port="3306" instance="cookiesys" user="root" passwd="cm9vdA==" schema_mapping="" />
 	<layout id="Layout_1b0cb6aa" name="cookiesys" joined_routing="y" show_relation_columns="y" >
 		<entity schema="cookiesys" name="page" color="bfd4f5" x="165" y="60" />
-		<entity schema="cookiesys" name="news" color="bfd4f5" x="45" y="60" />
-		<entity schema="cookiesys" name="module_conflicts" color="bfd4f5" x="315" y="45" />
 		<entity schema="cookiesys" name="module_depends" color="bfd4f5" x="735" y="45" />
 		<entity schema="cookiesys" name="module" color="bfd4f5" x="540" y="45" />
+		<entity schema="cookiesys" name="module_conflicts" color="bfd4f5" x="315" y="45" />
+		<entity schema="cookiesys" name="news" color="bfd4f5" x="45" y="60" />
 		<script name="Sql" id="SQL_1eef0456" >
 			<string><![CDATA[CREATE SCHEMA cookiesys;
 
