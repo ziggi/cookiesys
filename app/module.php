@@ -38,9 +38,9 @@ class Module extends Model {
 		            `module2`.`name` as 'dep_name'
 		          FROM
 		            `module_depends`
-		          INNER JOIN `module` `module1` ON
+		          RIGHT JOIN `module` `module1` ON
 		            `module1`.`module_id` = `module_depends`.`module_id`
-		          INNER JOIN `module` `module2` ON
+		          LEFT JOIN `module` `module2` ON
 		            `module2`.`module_id` = `module_depends`.`from_id`";
 
 		$result = $this->db->query($query);
@@ -66,6 +66,10 @@ class Module extends Model {
 		}
 
 		foreach ($modules[ $module_name ]['depends'] as $dep_name) {
+			if ($dep_name === null) {
+				continue;
+			}
+
 			$dep_params = $modules[ $dep_name ];
 
 			foreach ($dep_params['depends'] as $dep_dep_name) {
