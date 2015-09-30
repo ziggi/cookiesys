@@ -38,6 +38,10 @@ class Route extends App {
 		$params = array();
 		$found = 0;
 
+		if (self::$_uri_array === null) {
+			throw new Exception('Не заданы правила маршрутизации');
+		}
+
 		foreach (self::$_uri_array as $uri_key => $uri_array) {
 			$key_pattern = $uri_array['pattern'];
 
