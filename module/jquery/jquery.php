@@ -8,4 +8,4 @@ $this->route()->addRule(
 			'module' => 'jquery',
 			'action' => 'includeScript',
 		)
-	); 
+	);
