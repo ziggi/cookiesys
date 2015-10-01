@@ -25,6 +25,14 @@ class Config extends App {
 				'debug' => true,
 				'template' => 'default',
 			);
+		$this->_cfg['module'] = array(
+				'jquery' => array(
+						'is_use_cdn' => false,
+					),
+				'bootstrap' => array(
+						'is_use_cdn' => false,
+					),
+			);
 
 		// not editable zone
 		$site_path = dirname($_SERVER['SCRIPT_FILENAME']);

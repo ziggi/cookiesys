@@ -46,12 +46,20 @@ class View implements iView {
 		}
 	}
 
-	public function addScript($name, $module) {
-		$this->scripts[] = Config::get()->uri->module . '/' . $module . '/' . $name;
+	public function addScript($name, $module = null) {
+		if ($module === null) {
+			$this->scripts[] = $name;
+		} else {
+			$this->scripts[] = Config::get()->uri->module . '/' . $module . '/' . $name;
+		}
 	}
 
-	public function addStyle($name, $module) {
-		$this->styles[] = Config::get()->uri->module . '/' . $module . '/' . $name;
+	public function addStyle($name, $module = null) {
+		if ($module === null) {
+			$this->styles[] = $name;
+		} else {
+			$this->styles[] = Config::get()->uri->module . '/' . $module . '/' . $name;
+		}
 	}
 
 	public function addData($key, $value) {
@@ -75,6 +83,10 @@ class View implements iView {
 	}
 
 	public function render($data = null, $module = null, $file = 'template.tpl') {
+		if ($module !== 'admin') {
+			include_once Config::get()->path->template . '/' . Config::get()->site->template . '/' . Config::get()->site->template . '.php';
+		}
+
 		$this->addData(null, $data);
 		$this->smarty->assign('data', $this->data);
 		$this->smarty->assign('scripts', $this->scripts);
