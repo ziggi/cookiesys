@@ -38,9 +38,9 @@ class Module extends Model {
 		            `module2`.`name` as 'dep_name'
 		          FROM
 		            `module_depends`
-		          LEFT JOIN `module` `module1` ON
+		          INNER JOIN `module` `module1` ON
 		            `module1`.`module_id` = `module_depends`.`module_id`
-		          LEFT JOIN `module` `module2` ON
+		          INNER JOIN `module` `module2` ON
 		            `module2`.`module_id` = `module_depends`.`from_id`";
 
 		$result = $this->db->query($query);
