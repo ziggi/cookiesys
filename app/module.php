@@ -38,20 +38,17 @@ class Module extends Model {
 		            `module2`.`name` as 'dep_name'
 		          FROM
 		            `module_depends`
-		          RIGHT JOIN `module` `module1` ON
+		          LEFT JOIN `module` `module1` ON
 		            `module1`.`module_id` = `module_depends`.`module_id`
 		          LEFT JOIN `module` `module2` ON
 		            `module2`.`module_id` = `module_depends`.`from_id`";
 
 		$result = $this->db->query($query);
 
-		if ($result === false || $result->rowCount() == 0) {
-			$data['errorMsg'] = 'Модулей нет';
-			return $data;
-		}
-
-		while ($row = $result->fetch()) {
-			array_push($modules[ $row['name'] ]['depends'], $row['dep_name']);
+		if ($result !== false && $result->rowCount() > 0) {
+			while ($row = $result->fetch()) {
+				array_push($modules[ $row['name'] ]['depends'], $row['dep_name']);
+			}
 		}
 
 		// recursive load
@@ -66,10 +63,6 @@ class Module extends Model {
 		}
 
 		foreach ($modules[ $module_name ]['depends'] as $dep_name) {
-			if ($dep_name === null) {
-				continue;
-			}
-
 			$dep_params = $modules[ $dep_name ];
 
 			foreach ($dep_params['depends'] as $dep_dep_name) {
