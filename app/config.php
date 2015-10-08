@@ -43,7 +43,6 @@ class Config extends App {
 				'uri' => $site_subdir,
 				'site' => $site_path,
 				'package' => $site_path . '/package',
-				'template' => $site_path . '/package',
 			);
 		$this->_cfg['uri'] = array(
 				'site' => '//' . $site_uri,

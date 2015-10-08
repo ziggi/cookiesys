@@ -16,7 +16,7 @@ class View implements iView {
 		$this->smarty = new Smarty();
 
 		$this->smarty->setTemplateDir(array(
-				'default' => Config::get()->path->template . '/' . Config::get()->site->template,
+				'default' => Config::get()->path->package . '/' . Config::get()->site->template,
 				'admin' => Config::get()->path->package . '/admin/view',
 			));
 		$this->smarty->setCompileDir(__DIR__ . '/templates_c');
@@ -84,7 +84,7 @@ class View implements iView {
 
 	public function render($data = null, $package = null, $file = 'template.tpl') {
 		if ($package !== 'admin') {
-			include_once Config::get()->path->template . '/' . Config::get()->site->template . '/' . Config::get()->site->template . '.php';
+			include_once Config::get()->path->package . '/' . Config::get()->site->template . '/' . Config::get()->site->template . '.php';
 		}
 
 		$this->addData(null, $data);
@@ -95,7 +95,7 @@ class View implements iView {
 		if ($package === null) {
 			$this->smarty->display('extends:' . $this->extends . $file);
 		} else {
-			$package_template = Config::get()->path->template . '/' . Config::get()->site->template . '/package/' . $package . '/' . $file;
+			$package_template = Config::get()->path->package . '/' . Config::get()->site->template . '/package/' . $package . '/' . $file;
 			
 			if (file_exists($package_template)) {
 				$this->smarty->display('extends:' . $this->extends . $package_template);
