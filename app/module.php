@@ -7,7 +7,8 @@ class Module extends Model {
 		// get all modules from db
 		$query = "SELECT
 		            `name`,
-		            `installed`
+		            `installed`,
+		            `autoload`
 		          FROM
 		            `module`";
 
@@ -27,6 +28,7 @@ class Module extends Model {
 			}
 
 			$modules[ $row['name'] ] = array(
+			        'autoload' => $row['autoload'],
 			        'loaded' => false,
 			        'depends' => array(),
 			    );
@@ -47,13 +49,21 @@ class Module extends Model {
 
 		if ($result !== false && $result->rowCount() > 0) {
 			while ($row = $result->fetch()) {
-				array_push($modules[ $row['name'] ]['depends'], $row['dep_name']);
+				if (isset($modules[ $row['name'] ])) {
+					if (isset($modules[ $row['dep_name'] ])) {
+						array_push($modules[ $row['name'] ]['depends'], $row['dep_name']);
+					} else {
+						throw new Exception('Неразрешённая зависимость модуля ' . $row['name'] . ' от ' . $row['dep_name']);
+					}
+				}
 			}
 		}
 
 		// recursive load
 		foreach ($modules as $module => &$params) {
-			$this->load($modules, $module);
+			if ($params['autoload']) {
+				$this->load($modules, $module);
+			}
 		}
 	}
 

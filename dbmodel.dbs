@@ -9,6 +9,9 @@
 			<column name="installed" type="bit" decimal="0" jt="-7" mandatory="y" >
 				<defo>0</defo>
 			</column>
+			<column name="autoload" type="bit" jt="-7" >
+				<defo>1</defo>
+			</column>
 			<index name="pk_module" unique="PRIMARY_KEY" >
 				<column name="module_id" />
 			</index>
@@ -85,9 +88,9 @@
 	<layout id="Layout_1b0cb6aa" name="cookiesys" joined_routing="y" show_relation_columns="y" >
 		<entity schema="cookiesys" name="page" color="bfd4f5" x="165" y="60" />
 		<entity schema="cookiesys" name="module_depends" color="bfd4f5" x="735" y="45" />
-		<entity schema="cookiesys" name="module" color="bfd4f5" x="540" y="45" />
 		<entity schema="cookiesys" name="module_conflicts" color="bfd4f5" x="315" y="45" />
 		<entity schema="cookiesys" name="news" color="bfd4f5" x="45" y="60" />
+		<entity schema="cookiesys" name="module" color="bfd4f5" x="540" y="45" />
 		<script name="Sql" id="SQL_1eef0456" >
 			<string><![CDATA[CREATE SCHEMA cookiesys;
 

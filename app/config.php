@@ -23,7 +23,7 @@ class Config extends App {
 			);
 		$this->_cfg['site'] = array(
 				'debug' => true,
-				'template' => 'default',
+				'template' => 'tpl_default',
 			);
 		$this->_cfg['module'] = array(
 				'jquery' => array(
@@ -43,12 +43,12 @@ class Config extends App {
 				'uri' => $site_subdir,
 				'site' => $site_path,
 				'module' => $site_path . '/module',
-				'template' => $site_path . '/template',
+				'template' => $site_path . '/module',
 			);
 		$this->_cfg['uri'] = array(
 				'site' => '//' . $site_uri,
 				'module' => '//' . $site_uri . '/module',
-				'template' => '//' . $site_uri . '/template/' . $this->_cfg['site']['template'],
+				'template' => '//' . $site_uri . '/module/' . $this->_cfg['site']['template'],
 				'current' => '//' . preg_replace('#/$#', '', $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']),
 				'request' => str_replace($site_subdir, '', $_SERVER['REQUEST_URI']),
 			);
