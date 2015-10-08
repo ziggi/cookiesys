@@ -8,7 +8,7 @@ require_once 'controller.php';
 require_once 'view.php';
 
 require_once 'config.php';
-require_once 'module.php';
+require_once 'package.php';
 require_once 'route.php';
 
 

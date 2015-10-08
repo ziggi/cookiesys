@@ -17,7 +17,7 @@ class View implements iView {
 
 		$this->smarty->setTemplateDir(array(
 				'default' => Config::get()->path->template . '/' . Config::get()->site->template,
-				'admin' => Config::get()->path->module . '/admin/view',
+				'admin' => Config::get()->path->package . '/admin/view',
 			));
 		$this->smarty->setCompileDir(__DIR__ . '/templates_c');
 		$this->smarty->setCacheDir(__DIR__ . '/cache');
@@ -38,27 +38,27 @@ class View implements iView {
 		return self::$_instance;
 	}
 
-	public function addExtend($view, $module, $param = null) {
-		$this->extends .= Config::get()->path->module . '/' . $module . '/' . $view . '|';
+	public function addExtend($view, $package, $param = null) {
+		$this->extends .= Config::get()->path->package . '/' . $package . '/' . $view . '|';
 		
 		if ($param !== null) {
-			$this->smarty->assign($module, $param);
+			$this->smarty->assign($package, $param);
 		}
 	}
 
-	public function addScript($name, $module = null) {
-		if ($module === null) {
+	public function addScript($name, $package = null) {
+		if ($package === null) {
 			$this->scripts[] = $name;
 		} else {
-			$this->scripts[] = Config::get()->uri->module . '/' . $module . '/' . $name;
+			$this->scripts[] = Config::get()->uri->package . '/' . $package . '/' . $name;
 		}
 	}
 
-	public function addStyle($name, $module = null) {
-		if ($module === null) {
+	public function addStyle($name, $package = null) {
+		if ($package === null) {
 			$this->styles[] = $name;
 		} else {
-			$this->styles[] = Config::get()->uri->module . '/' . $module . '/' . $name;
+			$this->styles[] = Config::get()->uri->package . '/' . $package . '/' . $name;
 		}
 	}
 
@@ -82,8 +82,8 @@ class View implements iView {
 		}
 	}
 
-	public function render($data = null, $module = null, $file = 'template.tpl') {
-		if ($module !== 'admin') {
+	public function render($data = null, $package = null, $file = 'template.tpl') {
+		if ($package !== 'admin') {
 			include_once Config::get()->path->template . '/' . Config::get()->site->template . '/' . Config::get()->site->template . '.php';
 		}
 
@@ -92,15 +92,15 @@ class View implements iView {
 		$this->smarty->assign('scripts', $this->scripts);
 		$this->smarty->assign('styles', $this->styles);
 
-		if ($module === null) {
+		if ($package === null) {
 			$this->smarty->display('extends:' . $this->extends . $file);
 		} else {
-			$module_template = Config::get()->path->template . '/' . Config::get()->site->template . '/module/' . $module . '/' . $file;
+			$package_template = Config::get()->path->template . '/' . Config::get()->site->template . '/package/' . $package . '/' . $file;
 			
-			if (file_exists($module_template)) {
-				$this->smarty->display('extends:' . $this->extends . $module_template);
+			if (file_exists($package_template)) {
+				$this->smarty->display('extends:' . $this->extends . $package_template);
 			} else {
-				$this->smarty->display('extends:' . $this->extends . Config::get()->path->module . '/' . $module . '/' . $file);
+				$this->smarty->display('extends:' . $this->extends . Config::get()->path->package . '/' . $package . '/' . $file);
 			}
 		}
 	}

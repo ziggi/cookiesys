@@ -25,7 +25,7 @@ class Config extends App {
 				'debug' => true,
 				'template' => 'tpl_default',
 			);
-		$this->_cfg['module'] = array(
+		$this->_cfg['package'] = array(
 				'jquery' => array(
 						'is_use_cdn' => false,
 					),
@@ -42,13 +42,13 @@ class Config extends App {
 		$this->_cfg['path'] = array(
 				'uri' => $site_subdir,
 				'site' => $site_path,
-				'module' => $site_path . '/module',
-				'template' => $site_path . '/module',
+				'package' => $site_path . '/package',
+				'template' => $site_path . '/package',
 			);
 		$this->_cfg['uri'] = array(
 				'site' => '//' . $site_uri,
-				'module' => '//' . $site_uri . '/module',
-				'template' => '//' . $site_uri . '/module/' . $this->_cfg['site']['template'],
+				'package' => '//' . $site_uri . '/package',
+				'template' => '//' . $site_uri . '/package/' . $this->_cfg['site']['template'],
 				'current' => '//' . preg_replace('#/$#', '', $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']),
 				'request' => str_replace($site_subdir, '', $_SERVER['REQUEST_URI']),
 			);

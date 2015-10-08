@@ -12,7 +12,7 @@ class Controller_News_Admin extends Controller_Admin {
 		$data['title'] = 'Новости';
 		$data['text'] = 'Настройка новостей';
 
-		$this->view->addData('module', array('news' => array('active' => true)));
+		$this->view->addData('package', array('news' => array('active' => true)));
 		$this->view->render($data, 'news', 'admin/view.tpl');
 	}
 }

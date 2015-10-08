@@ -110,10 +110,10 @@ class Route extends App {
 
 		$controller = self::$_uri_array[$key]['params']['controller'];
 		$action = self::$_uri_array[$key]['params']['action'];
-		$module = self::$_uri_array[$key]['params']['module'];
+		$package = self::$_uri_array[$key]['params']['package'];
 		
 		// подгрузка контроллера
-		include_once "module/" . $module . "/controller.php";
+		include_once "package/" . $package . "/controller.php";
 
 		// проверяем на существование
 		if ( !class_exists($controller) ) {

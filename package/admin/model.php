@@ -2,11 +2,11 @@
 
 class Model_Admin extends Model {
 
-	public function getModuleList() {
+	public function getPackageList() {
 		$query = "SELECT
 		            `name`, `title`, `description`
 		          FROM
-		            `module`
+		            `package`
 		          WHERE
 		            `installed` = 1
 		          ORDER BY
@@ -21,13 +21,13 @@ class Model_Admin extends Model {
 
 		$data = array();
 
-		$modules = $this->route()->getRule('/^\/admin\/.*$/');
+		$packages = $this->route()->getRule('/^\/admin\/.*$/');
 
 		while ($row = $result->fetch()) {
 			$name = $row['name'];
 
-			foreach ($modules as $key => $value) {
-				if ($name === $value['params']['module']) {
+			foreach ($packages as $key => $value) {
+				if ($name === $value['params']['package']) {
 					$data[ $name ] = array(
 							'title' => $row['title'],
 							'description' => $row['description'],

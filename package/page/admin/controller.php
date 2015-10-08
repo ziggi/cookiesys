@@ -12,7 +12,7 @@ class Controller_Page_Admin extends Controller_Admin {
 		$data['title'] = 'Страницы';
 		$data['text'] = 'Настройка страниц';
 
-		$this->view->addData('module', array('page' => array('active' => true)));
+		$this->view->addData('package', array('page' => array('active' => true)));
 		$this->view->render($data, 'page', 'admin/view.tpl');
 	}
 }

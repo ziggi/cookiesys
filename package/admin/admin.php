@@ -6,7 +6,7 @@ include 'controller.php';
 $this->route()->addRule(
 	'/admin', array(
 			'controller' => 'Controller_Admin',
-			'module' => 'admin',
+			'package' => 'admin',
 			'action' => 'settings',
 		)
 	);
@@ -14,15 +14,15 @@ $this->route()->addRule(
 $this->route()->addRule(
 	'/admin/admin', array(
 			'controller' => 'Controller_Admin',
-			'module' => 'admin',
+			'package' => 'admin',
 			'action' => 'settings',
 		)
 	);
 
 $this->route()->addRule(
-	'/admin/module/add', array(
+	'/admin/package/add', array(
 			'controller' => 'Controller_Admin',
-			'module' => 'admin',
+			'package' => 'admin',
 			'action' => 'module_add',
 		)
 	);

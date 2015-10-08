@@ -3,11 +3,11 @@
 class App {
 	
 	private $_route;
-	private $_module;
+	private $_package;
 
 	public function init() {
 		try {
-			$this->module()->loadAll();
+			$this->package()->loadAll();
 			$this->route()->start();
 		} catch (Exception $e) {
 			$this->error($e);
@@ -21,11 +21,11 @@ class App {
 		return $this->_route;
 	}
 
-	public function module() {
-		if (!$this->_module instanceof Module) {
-			$this->_module = new Module;
+	public function package() {
+		if (!$this->_package instanceof Package) {
+			$this->_package = new Package;
 		}
-		return $this->_module;
+		return $this->_package;
 	}
 	
 	public function error($e) {

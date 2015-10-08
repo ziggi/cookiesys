@@ -6,7 +6,7 @@ include 'controller.php';
 $this->route()->addRule(
 	'/page/:name', array(
 			'controller' => 'Controller_Page',
-			'module' => 'page',
+			'package' => 'page',
 			'action' => 'show',
 		)
 	);
@@ -17,7 +17,7 @@ include 'admin/controller.php';
 $this->route()->addRule(
 	'/admin/page', array(
 			'controller' => 'Controller_Page_Admin',
-			'module' => 'page',
+			'package' => 'page',
 			'action' => 'show',
 		)
 	);

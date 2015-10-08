@@ -38,13 +38,13 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-{foreach from=$data.module key=module_name item=module}
-  {if isset($module.active)}
+{foreach from=$data.package key=package_name item=package}
+  {if isset($package.active)}
             <li class="active">
   {else}
             <li>
   {/if}
-              <a href="{$uri.site}/admin/{$module_name}">{$module.title}</a>
+              <a href="{$uri.site}/admin/{$package_name}">{$package.title}</a>
             </li>
 {/foreach}
           </ul>
