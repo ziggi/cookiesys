@@ -82,7 +82,7 @@ class View implements iView {
 		}
 	}
 
-	public function render($data = null, $package = null, $file = 'template.tpl') {
+	public function render($data = null, $package = null, $files = 'template.tpl') {
 		if (!isset($this->data['template']) || $this->data['template'] !== 'admin') {
 			include_once Config::get()->path->package . '/' . Config::get()->site->template . '/' . Config::get()->site->template . '.php';
 		}
@@ -92,16 +92,26 @@ class View implements iView {
 		$this->smarty->assign('scripts', $this->scripts);
 		$this->smarty->assign('styles', $this->styles);
 
-		if ($package === null) {
-			$this->smarty->display('extends:' . $this->extends . $file);
-		} else {
-			$package_template = Config::get()->path->package . '/' . Config::get()->site->template . '/package/' . $package . '/' . $file;
-			
-			if (file_exists($package_template)) {
-				$this->smarty->display('extends:' . $this->extends . $package_template);
+		$extends = '';
+
+		if (!is_array($files)) {
+			$files = array($files);
+		}
+
+		foreach ($files as $file) {
+			if ($package === null) {
+				$extends .= $this->extends . $file . '|';
 			} else {
-				$this->smarty->display('extends:' . $this->extends . Config::get()->path->package . '/' . $package . '/' . $file);
+				$package_template = Config::get()->path->package . '/' . Config::get()->site->template . '/package/' . $package . '/' . $file;
+				
+				if (file_exists($package_template)) {
+					$extends .= $this->extends . $package_template . '|';
+				} else {
+					$extends .= $this->extends . Config::get()->path->package . '/' . $package . '/' . $file . '|';
+				}
 			}
 		}
+
+		$this->smarty->display('extends:' . substr($extends, 0, -1));
 	}
 }
