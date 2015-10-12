@@ -5,5 +5,5 @@ interface iView {
 	public function addExtend($view, $package, $param);
 	public function addStyle($name, $package);
 	public function addScript($name, $package);
-	public function render($data = null, $package = null, $file = 'template.tpl');
+	public function render($data = null, $package = null, $files = 'template.tpl');
 }

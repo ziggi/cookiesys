@@ -99,17 +99,21 @@ class View implements iView {
 		}
 
 		foreach ($files as $file) {
+			$extends .= $this->extends;
+
 			if ($package === null) {
-				$extends .= $this->extends . $file . '|';
+				$extends .= $file;
 			} else {
 				$package_template = Config::get()->path->package . '/' . Config::get()->site->template . '/package/' . $package . '/' . $file;
 				
 				if (file_exists($package_template)) {
-					$extends .= $this->extends . $package_template . '|';
+					$extends .= $package_template;
 				} else {
-					$extends .= $this->extends . Config::get()->path->package . '/' . $package . '/' . $file . '|';
+					$extends .= Config::get()->path->package . '/' . $package . '/' . $file;
 				}
 			}
+
+			$extends .= '|';
 		}
 
 		$this->smarty->display('extends:' . substr($extends, 0, -1));
