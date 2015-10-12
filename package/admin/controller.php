@@ -20,10 +20,12 @@ class Controller_Admin extends Controller {
 	}
 
 	public function settings() {
+		$data['title'] = 'Админ панель';
+
 		$this->view->addScript('js/package_add.js', 'admin');
 
 		$this->view->addData('package', array('admin' => array('active' => true)));
-		$this->view->render(null, 'admin', 'view/settings.tpl');
+		$this->view->render($data, 'admin', 'view/settings.tpl');
 	}
 
 	public function package_add() {

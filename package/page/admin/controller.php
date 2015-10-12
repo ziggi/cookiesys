@@ -9,7 +9,9 @@ class Controller_Page_Admin extends Controller_Admin {
 	}
 
 	public function show() {
+		$data['title'] = 'Страницы';
+
 		$this->view->addData('package', array('page' => array('active' => true)));
-		$this->view->render(null, 'page', 'admin/view.tpl');
+		$this->view->render($data, 'page', 'admin/view.tpl');
 	}
 }
