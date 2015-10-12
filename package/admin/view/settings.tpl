@@ -1,19 +1,23 @@
 {extends file="file:[admin]template.tpl"}
 {block name=content}
-<h4 class="page-header">Настройки</h4>
-<div class="row">
-  <div class="col-md-6">
-    <div class="packageAdd">
-      <button class="btn btn-default" id="btnUpload">
-        <span class="glyphicon glyphicon-open-file" aria-hidden="true"></span>
-        Добавить пакет
-      </button>
-      <form id="inputForm" method="post" enctype="multipart/form-data" action="{$uri.site}/admin/package/add">
-        <input type="file" name="inputFile" id="inputFile">
-      </form>
-    </div>
+<div class="mdl-cell mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">Настройка</h2>
   </div>
-  <div class="col-md-6">
+  <div class="mdl-card__actions mdl-card--border">
+    <form action="#">
+      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
+        <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input" />
+        <span class="mdl-checkbox__label">Checkbox</span>
+      </label>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="sample3" />
+        <label class="mdl-textfield__label" for="sample3">Text...</label>
+      </div>
+      <button class="mdl-button mdl-js-button mdl-button--raised">
+        Button
+      </button>
+    </form>
   </div>
 </div>
 {/block}

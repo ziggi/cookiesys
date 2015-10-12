@@ -9,9 +9,8 @@ class Controller_Admin extends Controller {
 	}
 
 	public function init() {
-		jQuery::getInstance()->addScript($this->view, '2.1.3');
-		Bootstrap::getInstance()->addScript($this->view, '3.3.4');
-		Bootstrap::getInstance()->addStyle($this->view, '3.3.4');
+		Mdl::getInstance()->addStyle($this->view, '1.0.5');
+		Mdl::getInstance()->addScript($this->view, '1.0.5');
 
 		$this->view->addStyle('view/css/style.css', 'admin');
 
