@@ -10,6 +10,6 @@ class Controller_News_Admin extends Controller_Admin {
 
 	public function show() {
 		$this->view->addData('package', array('news' => array('active' => true)));
-		$this->view->render(null, 'news', 'admin/view.tpl');
+		$this->view->render(null, 'news', array('admin/add.tpl', 'admin/settings.tpl'));
 	}
 }
