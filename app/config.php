@@ -32,6 +32,10 @@ class Config extends App {
 				'bootstrap' => array(
 						'is_use_cdn' => false,
 					),
+				'mdl' => array(
+						'is_use_cdn' => false,
+						'color_scheme' => 'indigo-pink',
+					),
 			);
 
 		// not editable zone

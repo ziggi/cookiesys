@@ -16,6 +16,7 @@ class Controller_Admin extends Controller {
 		$this->view->addStyle('view/css/style.css', 'admin');
 
 		$data = $this->model->getPackageList();
+		$this->view->addData('template', 'admin');
 		$this->view->addData('package', $data);
 	}
 

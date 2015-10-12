@@ -83,7 +83,7 @@ class View implements iView {
 	}
 
 	public function render($data = null, $package = null, $file = 'template.tpl') {
-		if ($package !== 'admin') {
+		if (!isset($this->data['template']) || $this->data['template'] !== 'admin') {
 			include_once Config::get()->path->package . '/' . Config::get()->site->template . '/' . Config::get()->site->template . '.php';
 		}
 
