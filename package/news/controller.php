@@ -1,15 +1,17 @@
 <?php
 
-class Controller_News extends Controller {
-
-	function __construct() {
+class Controller_News extends Controller
+{
+	function __construct()
+	{
 		parent::__construct();
 		$this->model = new Model_News();
 	}
 
-	public function showAll() {
+	public function showAll()
+	{
 		$data = $this->model->getAll();
-		
+
 		if (isset($data['errorMsg'])) {
 			$this->view->render($data, null, '404.tpl');
 		} else {
@@ -17,11 +19,12 @@ class Controller_News extends Controller {
 		}
 	}
 
-	public function showOne($param) {
+	public function showOne($param)
+	{
 		$news_name = $param['name'];
 
 		$data = $this->model->get($news_name);
-		
+
 		if (isset($data['errorMsg'])) {
 			$this->view->render($data, null, '404.tpl');
 		} else {

@@ -1,6 +1,7 @@
 <?php
 
-interface iView {
+interface iView
+{
 	public static function getInstance();
 	public function addExtend($view, $package, $param);
 	public function addStyle($name, $package);

@@ -1,10 +1,11 @@
 <?php
 
-class Model extends App {
-	
+class Model extends App
+{
 	public $db;
 
-	function __construct() {
+	function __construct()
+	{
 		$host = Config::get()->db->host;
 		$base = Config::get()->db->base;
 		$user = Config::get()->db->user;
@@ -12,5 +13,4 @@ class Model extends App {
 
 		$this->db = new PDO("mysql:host=$host;dbname=$base", $user, $pass);
 	}
-
 }

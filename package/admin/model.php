@@ -1,8 +1,9 @@
 <?php
 
-class Model_Admin extends Model {
-
-	public function getPackageList() {
+class Model_Admin extends Model
+{
+	public function getPackageList()
+	{
 		$query = "SELECT
 		            `name`, `title`, `description`
 		          FROM
@@ -38,5 +39,4 @@ class Model_Admin extends Model {
 
 		return $data;
 	}
-
 }

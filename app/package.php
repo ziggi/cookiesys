@@ -1,8 +1,9 @@
 <?php
 
-class Package extends Model {
-
-	public function loadAll() {
+class Package extends Model
+{
+	public function loadAll()
+	{
 		// get all packages from db
 		$query = "SELECT
 		            `name`,
@@ -65,7 +66,8 @@ class Package extends Model {
 		}
 	}
 
-	public function load(&$packages, $package_name) {
+	public function load(&$packages, $package_name)
+	{
 		if ($packages[ $package_name ]['loaded']) {
 			return;
 		}

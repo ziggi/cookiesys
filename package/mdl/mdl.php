@@ -1,28 +1,33 @@
 <?php
 
-class Mdl {
-	
+class Mdl
+{
 	private static $_is_script_add = false;
 	private static $_is_style_add = false;
 
 	protected static $_instance = null;
 
-	private function __construct() {
+	private function __construct()
+	{
 
 	}
 
-	private function __clone() {
+	private function __clone()
+	{
 
 	}
 
-	public static function getInstance() {
+	public static function getInstance()
+	{
 		if (self::$_instance === null) {
 			self::$_instance = new self();
 		}
+
 		return self::$_instance;
 	}
 
-	public static function addScript(View $view, $version) {
+	public static function addScript(View $view, $version)
+	{
 		if (!self::$_is_script_add) {
 			$filename = 'mdl-' . $version . '/material.min.js';
 
@@ -36,7 +41,8 @@ class Mdl {
 		}
 	}
 
-	public static function addStyle(View $view, $version) {
+	public static function addStyle(View $view, $version)
+	{
 		if (!self::$_is_style_add) {
 			$filename = 'mdl-' . $version . '/material.min.css';
 

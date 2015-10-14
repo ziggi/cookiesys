@@ -1,18 +1,20 @@
 <?php
 
-class Route extends App {
-	
+class Route extends App
+{
 	private static $_uri_array;
 	private static $_pattern_types = array(
 			'number' => '[0-9]+',
 			'string' => '[a-zA-Zа-яА-ЯёЁ0-9\-]+',
 		);
 
-	public function addRule($pattern, $params) {
+	public function addRule($pattern, $params)
+	{
 		self::$_uri_array[] = array('pattern' => $pattern, 'params' => $params);
 	}
 
-	public function getRule($pattern) {
+	public function getRule($pattern)
+	{
 		$result = array();
 
 		foreach (self::$_uri_array as $row) {
@@ -24,8 +26,9 @@ class Route extends App {
 
 		return $result;
 	}
-	
-	public function start() {
+
+	public function start()
+	{
 		$uri = urldecode(Config::get()->uri->request);
 
 		// default
@@ -103,7 +106,8 @@ class Route extends App {
 		$this->executeAction($key, $params);
 	}
 
-	public function executeAction($key, $params = null) {
+	public function executeAction($key, $params = null)
+	{
 		if ($key === null) {
 			throw new Exception('Паттерн не найден');
 		}
@@ -111,7 +115,7 @@ class Route extends App {
 		$controller = self::$_uri_array[$key]['params']['controller'];
 		$action = self::$_uri_array[$key]['params']['action'];
 		$package = self::$_uri_array[$key]['params']['package'];
-		
+
 		// подгрузка контроллера
 		include_once "package/" . $package . "/controller.php";
 

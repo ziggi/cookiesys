@@ -1,14 +1,16 @@
 <?php
 
-class Controller_Admin extends Controller {
-
-	function __construct() {
+class Controller_Admin extends Controller
+{
+	function __construct()
+	{
 		parent::__construct();
 		$this->model = new Model_Admin();
 		$this->init();
 	}
 
-	public function init() {
+	public function init()
+	{
 		Mdl::getInstance()->addStyle($this->view, '1.0.5');
 		Mdl::getInstance()->addScript($this->view, '1.0.5');
 
@@ -19,7 +21,8 @@ class Controller_Admin extends Controller {
 		$this->view->addData('package', $data);
 	}
 
-	public function settings() {
+	public function settings()
+	{
 		$data['title'] = 'Админ панель';
 
 		$this->view->addScript('js/package_add.js', 'admin');
@@ -28,8 +31,8 @@ class Controller_Admin extends Controller {
 		$this->view->render($data, 'admin', 'view/settings.tpl');
 	}
 
-	public function package_add() {
+	public function package_add()
+	{
 		print_r($_FILES);
 	}
-
 }

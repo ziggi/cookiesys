@@ -1,27 +1,32 @@
 <?php
 
-class jQuery {
-
+class jQuery
+{
 	private static $_isadd = false;
 
 	protected static $_instance = null;
 
-	private function __construct() {
+	private function __construct()
+	{
 
 	}
 
-	private function __clone() {
+	private function __clone()
+	{
 
 	}
 
-	public static function getInstance() {
+	public static function getInstance()
+	{
 		if (self::$_instance === null) {
 			self::$_instance = new self();
 		}
+
 		return self::$_instance;
 	}
 
-	public static function addScript(View $view, $version) {
+	public static function addScript(View $view, $version)
+	{
 		if (!self::$_isadd) {
 			$filename = 'jquery-' . $version . '.min.js';
 

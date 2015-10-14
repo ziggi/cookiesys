@@ -2,8 +2,8 @@
 
 include_once 'Smarty-3.1.21/Smarty.class.php';
 
-class View implements iView {
-
+class View implements iView
+{
 	public $extends;
 	public $scripts;
 	public $styles;
@@ -12,7 +12,8 @@ class View implements iView {
 	private $smarty;
 	private static $_instance = null;
 
-	private function __construct() {
+	private function __construct()
+	{
 		$this->smarty = new Smarty();
 
 		$this->smarty->setTemplateDir(array(
@@ -27,26 +28,31 @@ class View implements iView {
 		$this->smarty->assign('uri', Config::get()->uri->returnArray());
 	}
 
-	private function __clone() {
+	private function __clone()
+	{
 
 	}
 
-	public static function getInstance() {
+	public static function getInstance()
+	{
 		if (self::$_instance === null) {
 			self::$_instance = new self();
 		}
+
 		return self::$_instance;
 	}
 
-	public function addExtend($view, $package, $param = null) {
+	public function addExtend($view, $package, $param = null)
+	{
 		$this->extends .= Config::get()->path->package . '/' . $package . '/' . $view . '|';
-		
+
 		if ($param !== null) {
 			$this->smarty->assign($package, $param);
 		}
 	}
 
-	public function addScript($name, $package = null) {
+	public function addScript($name, $package = null)
+	{
 		if ($package === null) {
 			$this->scripts[] = $name;
 		} else {
@@ -54,7 +60,8 @@ class View implements iView {
 		}
 	}
 
-	public function addStyle($name, $package = null) {
+	public function addStyle($name, $package = null)
+	{
 		if ($package === null) {
 			$this->styles[] = $name;
 		} else {
@@ -62,7 +69,8 @@ class View implements iView {
 		}
 	}
 
-	public function addData($key, $value) {
+	public function addData($key, $value)
+	{
 		if ($value == null) {
 			return;
 		}
@@ -82,7 +90,8 @@ class View implements iView {
 		}
 	}
 
-	public function render($data = null, $package = null, $files = 'template.tpl') {
+	public function render($data = null, $package = null, $files = 'template.tpl')
+	{
 		if (!isset($this->data['template']) || $this->data['template'] !== 'admin') {
 			include_once Config::get()->path->package . '/' . Config::get()->site->template . '/' . Config::get()->site->template . '.php';
 		}
@@ -105,7 +114,7 @@ class View implements iView {
 				$extends .= $file;
 			} else {
 				$package_template = Config::get()->path->package . '/' . Config::get()->site->template . '/package/' . $package . '/' . $file;
-				
+
 				if (file_exists($package_template)) {
 					$extends .= $package_template;
 				} else {

@@ -1,19 +1,22 @@
 <?php
 
-class Config extends App {
-	
+class Config extends App
+{
 	private $_pointer = null;
 	private $_cfg;
-	
-	public static function get() {
+
+	public static function get()
+	{
 		return (new Config);
 	}
 
-	public function returnArray() {
+	public function returnArray()
+	{
 		return $this->_pointer;
 	}
-	
-	function __construct() {
+
+	function __construct()
+	{
 		// editable zone
 		$this->_cfg['db'] = array(
 				'host' => '127.0.0.1',
@@ -56,8 +59,9 @@ class Config extends App {
 				'request' => str_replace($site_subdir, '', $_SERVER['REQUEST_URI']),
 			);
 	}
-	
-	function __get($name) { 
+
+	function __get($name)
+	{
 		if ($this->_pointer === null) {
 			if (isset($this->_cfg[$name])) {
 				$this->_pointer = $this->_cfg[$name];

@@ -1,11 +1,12 @@
 <?php
 
-class App {
-	
+class App
+{
 	private $_route;
 	private $_package;
 
-	public function init() {
+	public function init()
+	{
 		try {
 			$this->package()->loadAll();
 			$this->route()->start();
@@ -13,22 +14,27 @@ class App {
 			$this->error($e);
 		}
 	}
-	
-	public function route() {
+
+	public function route()
+	{
 		if (!$this->_route instanceof Route) {
 			$this->_route = new Route;
 		}
+		
 		return $this->_route;
 	}
 
-	public function package() {
+	public function package()
+	{
 		if (!$this->_package instanceof Package) {
 			$this->_package = new Package;
 		}
+
 		return $this->_package;
 	}
-	
-	public function error($e) {
+
+	public function error($e)
+	{
 		$error_msg = $e->getMessage();
 		echo 'Ошибка: ' . $error_msg;
 	}
