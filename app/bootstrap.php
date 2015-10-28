@@ -10,6 +10,7 @@ require_once 'view.php';
 require_once 'config.php';
 require_once 'package.php';
 require_once 'route.php';
+require_once 'request.php';
 
 
 // error reporting

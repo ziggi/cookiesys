@@ -30,3 +30,11 @@ $this->route()->addRule(
 			'action' => 'show',
 		)
 	);
+
+$this->route()->addRule(
+	'/admin/news/add', array(
+			'controller' => 'Controller_News_Admin',
+			'package' => 'news',
+			'action' => 'add',
+		)
+	);

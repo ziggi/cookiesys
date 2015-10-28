@@ -19,9 +19,9 @@ class Controller_News extends Controller
 		}
 	}
 
-	public function showOne($param)
+	public function showOne($params)
 	{
-		$news_name = $param['name'];
+		$news_name = $params['name'];
 
 		$data = $this->model->get($news_name);
 
