@@ -7,29 +7,58 @@ class Controller_News_Admin extends Controller_Admin
 		parent::__construct();
 		$this->model = new Model_News_Admin();
 		$this->model_admin = new Model_Admin();
+		$this->model_news = new Model_News();
 	}
 
-	public function show()
+	public function show($data)
 	{
-		$data['title'] = 'Новости';
-		$data['submit'] = array(
-				'add' => Config::get()->uri->site . '/admin/news/add'
-			);
+		if ($this->request->isAfterRedirect()) {
+			$this->request->unsetParam('after_redirect', Request::METHOD_SESSION);
+		}
 
-		$this->view->addData('package', array('news' => array('active' => true)));
-		$this->view->render($data, 'news', array('admin/add.tpl', 'admin/settings.tpl'));
+		$data['title'] = 'Новости';
+		$data['submit'] = [
+				'add' => Config::get()->uri->site . '/admin/news/add'
+			];
+
+		$this->view->addData('package', ['news' => ['active' => true]]);
+		$this->view->render($data, 'news', ['admin/add.tpl', 'admin/settings.tpl']);
 	}
 
 	public function add()
 	{
-		$name = $this->request->getPost('name', 'string');
-		$title = $this->request->getPost('title', 'string');
-		$text = $this->request->getPost('text', 'string');
+		$validate = new Validator($this->request->getAll(Request::METHOD_POST), [
+				'name' => ['required', 'string'],
+				'title' => ['required', 'string'],
+				'text' => ['required', 'string'],
+			]);
 
-		$data = $this->model->add($name, $title, $text);
-		var_dump($data);
+		try {
+			if (!$validate->isValid()) {
+				throw new Exception('Валидация не пройдена');
+			}
 
-		//$this->view->render($data, 'news', array('admin/add.tpl', 'admin/settings.tpl'));
-		$this->show();
+			$name = $validate->getParam('name');
+			$title = $validate->getParam('title');
+			$text = $validate->getParam('text');
+
+			$is_exist = $this->model_news->get($name) !== false;
+			if ($is_exist) {
+				throw new Exception('Новость с таким именем уже существует');
+			}
+
+			$is_added = $this->model->add($name, $title, $text);
+			if (!$is_added) {
+				throw new Exception('Запрос не выполнен');
+			}
+
+			$data['successMsg'] = 'Новость успешно добавлена';
+		} catch (Exception $e) {
+			$data['validator'] = $validate->getInfo();
+
+			$data['errorMsg'] = $e->getMessage();
+		} finally {
+			$this->request->redirect(['admin/news', 'data' => $data]);
+		}
 	}
 }

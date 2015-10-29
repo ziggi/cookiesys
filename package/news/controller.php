@@ -12,7 +12,9 @@ class Controller_News extends Controller
 	{
 		$data = $this->model->getAll();
 
-		if (isset($data['errorMsg'])) {
+		if ($data === false) {
+			$data['errorMsg'] = 'Новостей нет';
+			
 			$this->view->render($data, null, '404.tpl');
 		} else {
 			$this->view->render($data, 'news', 'view_all.tpl');
@@ -25,7 +27,9 @@ class Controller_News extends Controller
 
 		$data = $this->model->get($news_name);
 
-		if (isset($data['errorMsg'])) {
+		if ($data === false) {
+			$data['errorMsg'] = 'Новость не найдена';
+			
 			$this->view->render($data, null, '404.tpl');
 		} else {
 			$this->view->render($data, 'news', 'view.tpl');

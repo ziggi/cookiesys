@@ -97,6 +97,9 @@ class View implements iView
 		}
 
 		$this->addData(null, $data);
+		if (isset($_SESSION['redirect'])) {
+			$this->addData('redirect', $_SESSION['redirect']);
+		}
 		$this->smarty->assign('data', $this->data);
 		$this->smarty->assign('scripts', $this->scripts);
 		$this->smarty->assign('styles', $this->styles);

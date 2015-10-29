@@ -17,6 +17,8 @@ require_once 'request.php';
 error_reporting(Config::get()->site->debug ? E_ALL : 0);
 ini_set('display_errors', Config::get()->site->debug);
 
+// session
+session_start();
 
 // init
 $app = new App;

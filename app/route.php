@@ -5,7 +5,7 @@ class Route extends App
 	private static $_uri_array;
 	private static $_pattern_types = array(
 			'number' => '[0-9]+',
-			'string' => '[a-zA-Zа-яА-ЯёЁ0-9\-]+',
+			'string' => '[a-zа-яё0-9\-]+',
 		);
 
 	public function addRule($pattern, $params)
@@ -60,7 +60,7 @@ class Route extends App
 
 			// подготовка паттерна для сравнения и выполнение регулярных выражений в паттерне
 			$pattern = preg_replace('/\//i', '\/', $key_pattern);
-			$pattern = preg_replace_callback('/:(\w+)(\{([^:]+)\})?/i',
+			$pattern = preg_replace_callback('/:(\w+)(\{([^:]+)\})?/iu',
 				function ($matches) {
 					if (isset($matches[3])) {
 						if (isset(self::$_pattern_types[$matches[3]])) {
@@ -75,7 +75,7 @@ class Route extends App
 				, $pattern);
 
 			// сравниваем URI с паттерном
-			$found = preg_match('/^' . $pattern . '.?$/iu', $uri, $matches);
+			$found = preg_match('/^' . $pattern . '\/?$/iu', $uri, $matches);
 			if ($found == 1) {
 				array_shift($matches);
 				$params = $matches;
