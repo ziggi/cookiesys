@@ -86,10 +86,8 @@ class Package extends Model
 
 		$include_file = 'package/' . $package_name . '/' . $package_name . '.php';
 
-		if (file_exists($include_file)) {
+		if (include_once $include_file) {
 			$packages[ $package_name ]['loaded'] = true;
-
-			include_once $include_file;
 		} else {
 			throw new Exception('Модуль ' . $package_name . ' не загружен');
 		}
