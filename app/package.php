@@ -6,9 +6,7 @@ class Package extends Model
 	{
 		// get all packages from db
 		$query = "SELECT
-		            `name`,
-		            `installed`,
-		            `autoload`
+		            `name`, `installed`, `autoload`
 		          FROM
 		            `package`";
 
@@ -19,18 +17,18 @@ class Package extends Model
 		}
 
 		// make packages array
-		$packages = array();
+		$packages = [];
 
 		while ($row = $result->fetch()) {
 			if (!(bool)$row['installed']) {
 				continue;
 			}
 
-			$packages[ $row['name'] ] = array(
+			$packages[ $row['name'] ] = [
 			        'autoload' => $row['autoload'],
 			        'loaded' => false,
-			        'depends' => array(),
-			    );
+			        'depends' => [],
+			    ];
 		}
 
 		// get all packages depends

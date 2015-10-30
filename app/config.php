@@ -18,46 +18,46 @@ class Config extends App
 	function __construct()
 	{
 		// editable zone
-		$this->_cfg['db'] = array(
+		$this->_cfg['db'] = [
 				'host' => '127.0.0.1',
 				'base' => 'cookiesys',
 				'user' => 'root',
 				'pass' => 'root',
-			);
-		$this->_cfg['site'] = array(
+			];
+		$this->_cfg['site'] = [
 				'debug' => true,
 				'template' => 'tpl_default',
-			);
-		$this->_cfg['package'] = array(
-				'jquery' => array(
+			];
+		$this->_cfg['package'] = [
+				'jquery' => [
 						'is_use_cdn' => false,
-					),
-				'bootstrap' => array(
+					],
+				'bootstrap' => [
 						'is_use_cdn' => false,
-					),
-				'mdl' => array(
+					],
+				'mdl' => [
 						'is_use_cdn' => false,
 						'color_scheme' => 'indigo-pink',
-					),
-			);
+					],
+			];
 
 		// not editable zone
 		$site_path = dirname($_SERVER['SCRIPT_FILENAME']);
 		$site_subdir = dirname($_SERVER['PHP_SELF']);
 		$site_uri = preg_replace('#/$#', '', $_SERVER['SERVER_NAME'] . $site_subdir);
 
-		$this->_cfg['path'] = array(
+		$this->_cfg['path'] = [
 				'uri' => $site_subdir,
 				'site' => $site_path,
 				'package' => $site_path . '/package',
-			);
-		$this->_cfg['uri'] = array(
+			];
+		$this->_cfg['uri'] = [
 				'site' => '//' . $site_uri,
 				'package' => '//' . $site_uri . '/package',
 				'template' => '//' . $site_uri . '/package/' . $this->_cfg['site']['template'],
 				'current' => '//' . preg_replace('#/$#', '', $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']),
 				'request' => str_replace($site_subdir, '', $_SERVER['REQUEST_URI']),
-			);
+			];
 	}
 
 	function __get($name)

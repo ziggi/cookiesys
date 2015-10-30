@@ -4,7 +4,12 @@ class Model_News extends Model
 {
 	function getAll()
 	{
-		$result = $this->db->query("SELECT `name`, `title`, `text` FROM `news`");
+		$query = "SELECT
+		            `name`, `title`, `text`
+		          FROM
+		            `news`";
+
+		$result = $this->db->query($query);
 
 		if ($result === false || $result->rowCount() == 0) {
 			return false;
@@ -25,18 +30,25 @@ class Model_News extends Model
 
 	function get($news_name)
 	{
-		$result = $this->db->query("SELECT `name`, `title`, `text` FROM `news` WHERE `name` = '$news_name'");
+		$query = "SELECT
+		            `name`, `title`, `text`
+		          FROM
+		            `news`
+		          WHERE
+		            `name` = ?";
 
-		if ($result === false || $result->rowCount() == 0) {
+		$sth = $this->db->prepare($query);
+
+		if (!$sth->execute([$news_name]) || $sth->rowCount() == 0) {
 			return false;
 		}
 
-		$array = $result->fetch();
+		$result = $sth->fetch();
 
 		$data = [
-				'name' => $array['name'],
-				'title' => $array['title'],
-				'text' => $array['text'],
+				'name' => $result['name'],
+				'title' => $result['title'],
+				'text' => $result['text'],
 			];
 
 		return $data;

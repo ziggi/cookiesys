@@ -14,7 +14,9 @@ class Controller_Page extends Controller
 
 		$data = $this->model->get($page_name);
 
-		if (isset($data['errorMsg'])) {
+		if ($data === false) {
+			$data['errorMsg'] = 'Страница не найдена';
+			
 			$this->view->render($data, null, '404.tpl');
 		} else {
 			$this->view->render($data, 'page', 'view.tpl');

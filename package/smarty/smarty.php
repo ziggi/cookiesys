@@ -7,7 +7,7 @@ class View implements iView
 	public $extends;
 	public $scripts;
 	public $styles;
-	public $data = array();
+	public $data = [];
 
 	private $smarty;
 	private static $_instance = null;
@@ -16,10 +16,10 @@ class View implements iView
 	{
 		$this->smarty = new Smarty();
 
-		$this->smarty->setTemplateDir(array(
+		$this->smarty->setTemplateDir([
 				'default' => Config::get()->path->package . '/' . Config::get()->site->template,
 				'admin' => Config::get()->path->package . '/admin/view',
-			));
+			]);
 		$this->smarty->setCompileDir(__DIR__ . '/templates_c');
 		$this->smarty->setCacheDir(__DIR__ . '/cache');
 		$this->smarty->setConfigDir(__DIR__ . '/configs');
@@ -79,7 +79,7 @@ class View implements iView
 			if ($key == null) {
 				$this->data = array_merge($this->data, $value);
 			} else {
-				$this->data = array_merge_recursive($this->data, array($key => $value));
+				$this->data = array_merge_recursive($this->data, [$key => $value]);
 			}
 		} else {
 			if ($key == null) {
@@ -107,7 +107,7 @@ class View implements iView
 		$extends = '';
 
 		if (!is_array($files)) {
-			$files = array($files);
+			$files = [$files];
 		}
 
 		foreach ($files as $file) {

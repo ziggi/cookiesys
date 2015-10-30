@@ -9,10 +9,10 @@ class Validator
 	{
 		// rules for validation
 		$this->_rules = [
-			'required' => function ($value) {
-				return !empty($value);
-			},
-		];
+				'required' => function ($value) {
+					return !empty($value);
+				},
+			];
 
 		// add item in array
 		foreach ($params as $param => $value) {

@@ -3,19 +3,15 @@
 class Route extends App
 {
 	private static $_uri_array;
-	private static $_pattern_types = array(
-			'number' => '[0-9]+',
-			'string' => '[a-zа-яё0-9\-]+',
-		);
 
 	public function addRule($pattern, $params)
 	{
-		self::$_uri_array[] = array('pattern' => $pattern, 'params' => $params);
+		self::$_uri_array[] = ['pattern' => $pattern, 'params' => $params];
 	}
 
 	public function getRule($pattern)
 	{
-		$result = array();
+		$result = [];
 
 		foreach (self::$_uri_array as $row) {
 			$found = preg_match($pattern, $row['pattern'], $matches);
@@ -38,7 +34,7 @@ class Route extends App
 
 		// роутинг
 		$key = null;
-		$params = array();
+		$params = [];
 		$found = 0;
 
 		if (self::$_uri_array === null) {

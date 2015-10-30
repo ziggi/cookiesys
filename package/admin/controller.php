@@ -17,6 +17,10 @@ class Controller_Admin extends Controller
 		$this->view->addStyle('view/css/style.css', 'admin');
 
 		$data = $this->model->getPackageList();
+		if ($data === false) {
+			$data['errorMsg'] = 'Модулей нет';
+		}
+
 		$this->view->addData('template', 'admin');
 		$this->view->addData('package', $data);
 	}
@@ -27,7 +31,7 @@ class Controller_Admin extends Controller
 
 		$this->view->addScript('js/package_add.js', 'admin');
 
-		$this->view->addData('package', array('admin' => array('active' => true)));
+		$this->view->addData('package', ['admin' => ['active' => true]]);
 		$this->view->render($data, 'admin', 'view/settings.tpl');
 	}
 

@@ -4,8 +4,13 @@ class Model_News_Admin extends Model
 {
 	public function add($name, $title, $text)
 	{
-		$result = $this->db->query("INSERT INTO `news` (`name`, `title`, `text`) VALUES ('$name', '$title', '$text')");
+		$query = "INSERT INTO
+		            `news` (`name`, `title`, `text`)
+		          VALUES
+		            (?, ?, ?)";
 
-		return $result;
+		$sth = $this->db->prepare($query);
+
+		return $sth->execute([$name, $title, $text]);
 	}
 }

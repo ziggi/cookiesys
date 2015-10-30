@@ -14,7 +14,7 @@ abstract class Singleton
 
 	final public static function getInstance()
 	{
-		static $instances = array();
+		static $instances = [];
 
 		$called_class = get_called_class();
 

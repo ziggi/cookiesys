@@ -16,11 +16,10 @@ class Model_Admin extends Model
 		$result = $this->db->query($query);
 
 		if ($result === false || $result->rowCount() == 0) {
-			$data['errorMsg'] = 'Модулей нет';
-			return $data;
+			return false;
 		}
 
-		$data = array();
+		$data = [];
 
 		$packages = $this->route()->getRule('/^\/admin\/.*$/');
 
@@ -29,10 +28,10 @@ class Model_Admin extends Model
 
 			foreach ($packages as $key => $value) {
 				if ($name === $value['params']['package']) {
-					$data[ $name ] = array(
+					$data[ $name ] = [
 							'title' => $row['title'],
 							'description' => $row['description'],
-						);
+						];
 				}
 			}
 		}
