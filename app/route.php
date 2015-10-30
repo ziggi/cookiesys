@@ -62,7 +62,9 @@ class Route extends App
 			$pattern = preg_replace('/\//i', '\/', $key_pattern);
 			$pattern = preg_replace_callback('/:(\w+)(\{([^:]+)\})?/iu',
 				function ($matches) {
-					if ($type_name = isset($matches[3]) !== false) {
+					$type_name = isset($matches[3]) ? $matches[3] : false;
+
+					if ($type_name !== false) {
 						$type_pattern = Types::getPattern($type_name);
 
 						if ($type_pattern !== false) {

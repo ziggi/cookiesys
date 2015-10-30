@@ -26,7 +26,7 @@ class Validator
 	public function isValidParam($value, $rule)
 	{
 		// type validation
-		if ($pattern = Types::getPattern($rule) !== false) {
+		if (($pattern = Types::getPattern($rule)) !== false) {
 			return preg_match('/^' . $pattern . '$/iu', $value);
 		}
 
