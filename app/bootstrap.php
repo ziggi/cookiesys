@@ -12,6 +12,7 @@ require_once 'package.php';
 require_once 'route.php';
 require_once 'request.php';
 require_once 'types.php';
+require_once 'singleton.php';
 
 
 // error reporting

@@ -1,30 +1,9 @@
 <?php
 
-class Mdl
+class Mdl extends Singleton
 {
 	private static $_is_script_add = false;
 	private static $_is_style_add = false;
-
-	protected static $_instance = null;
-
-	private function __construct()
-	{
-
-	}
-
-	private function __clone()
-	{
-
-	}
-
-	public static function getInstance()
-	{
-		if (self::$_instance === null) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
-	}
 
 	public static function addScript(View $view, $version)
 	{

@@ -1,29 +1,8 @@
 <?php
 
-class jQuery
+class jQuery extends Singleton
 {
 	private static $_isadd = false;
-
-	protected static $_instance = null;
-
-	private function __construct()
-	{
-
-	}
-
-	private function __clone()
-	{
-
-	}
-
-	public static function getInstance()
-	{
-		if (self::$_instance === null) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
-	}
 
 	public static function addScript(View $view, $version)
 	{
