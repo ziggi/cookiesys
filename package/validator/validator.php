@@ -9,12 +9,9 @@ class Validator
 	{
 		// rules for validation
 		$this->_rules = [
-			'string' => function ($value) {
-				return preg_match('/^[a-zа-яё0-9\-]+$/iu', $value);
-			},
 			'required' => function ($value) {
 				return !empty($value);
-			}
+			},
 		];
 
 		// add item in array
@@ -28,9 +25,16 @@ class Validator
 
 	public function isValidParam($value, $rule)
 	{
+		// type validation
+		if ($pattern = Types::getPattern($rule) !== false) {
+			return preg_match('/^' . $pattern . '$/iu', $value);
+		}
+
+		// rules validation
 		if (isset($this->_rules[$rule])) {
 			return $this->_rules[$rule]($value);
 		}
+
 		return false;
 	}
 

@@ -11,6 +11,7 @@ require_once 'config.php';
 require_once 'package.php';
 require_once 'route.php';
 require_once 'request.php';
+require_once 'types.php';
 
 
 // error reporting

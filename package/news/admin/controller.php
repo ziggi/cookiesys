@@ -30,7 +30,7 @@ class Controller_News_Admin extends Controller_Admin
 		$validate = new Validator($this->request->getAll(Request::METHOD_POST), [
 				'name' => ['required', 'string'],
 				'title' => ['required', 'string'],
-				'text' => ['required', 'string'],
+				'text' => ['required', 'text'],
 			]);
 
 		try {
