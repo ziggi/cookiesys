@@ -53,9 +53,9 @@
             </button>
           </div>
           <div class="tpl-menu-dropdown">
-            <button id="menu-home" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <a id="menu-home" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="{$uri.site}">
               <i class="material-icons">home</i>
-            </button>
+            </a>
             <div class="mdl-tooltip" for="menu-home">
             Home
             </div>
