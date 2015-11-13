@@ -117,14 +117,20 @@ class Route extends App
 		$package = self::$_uri_array[$key]['params']['package'];
 
 		// подгрузка контроллера
-		include_once "package/" . $package . "/controller.php";
+		$include_file = "package/" . $package . "/controller.php";
+
+		if (!file_exists($include_file)) {
+			throw new Exception('Контроллер не подгружен');
+		} else {
+			include_once $include_file;
+		}
 
 		// проверяем на существование
-		if ( !class_exists($controller) ) {
+		if (!class_exists($controller)) {
 			throw new Exception('Не найден контроллер');
 		}
 
-		if ( !method_exists($controller, $action) ) {
+		if (!method_exists($controller, $action)) {
 			throw new Exception('Не найден обработчик');
 		}
 
